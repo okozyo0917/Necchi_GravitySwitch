@@ -8,6 +8,7 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         
     }
 
@@ -15,5 +16,28 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         transform.position += new Vector3(0, 0, speed * Time.deltaTime);
+        
+    }
+
+
+    void OnCollisionStay(Collision col)
+    {
+       
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Physics.gravity = new Vector3(0, 9.8f, 0);
+
+            if (transform.position.y >2)
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    Physics.gravity = new Vector3(0, -9.8f, 0);
+
+                }
+            }
+            
+
+        }
     }
 }
