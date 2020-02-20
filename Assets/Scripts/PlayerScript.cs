@@ -24,13 +24,13 @@ public class PlayerScript : MonoBehaviour
     {
        
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonUp(0))
         {
             Physics.gravity = new Vector3(0, 9.8f, 0);
 
             if (transform.position.y >2)
             {
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonUp(0))
                 {
                     Physics.gravity = new Vector3(0, -9.8f, 0);
 

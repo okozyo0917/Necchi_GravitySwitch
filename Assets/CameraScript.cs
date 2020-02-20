@@ -21,8 +21,9 @@ public class CameraScript : MonoBehaviour
         if (camerazero == 0)
        {
           speed = 0f;
-       
+            camerazero = 1;
         }
+
     }
 
 }

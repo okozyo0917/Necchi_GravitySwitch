@@ -11,11 +11,15 @@ public class ColliderScript2 : MonoBehaviour
 
     public GameObject Explotion;
     public GameObject gameOver;
-    public GameObject gameOverScore; //gameover時に表示されるスコア
+    public Text gameOverScore; //gameover時に表示されるスコア
+    public int highScore;
+    private string key = "HIGH SCORE";
 
     // Start is called before the first frame update
     void Start()
     {
+        highScore = PlayerPrefs.GetInt(key,0);
+        gameOverScore.text = "HighScore : " + highScore.ToString();
         Explotion.GetComponent<ParticleSystem>().Stop();
 
     }
@@ -40,9 +44,10 @@ public class ColliderScript2 : MonoBehaviour
             gameObject.transform.parent = null;
             Explotion.GetComponent<ParticleSystem>().Play();
             gameOver.SetActive(true);
-            gameOverScore.GetComponent<Text>().text = "Score : " + ScoreScript.Count.ToString();
 
-            Destroy(player);
+            //gameOverScore.GetComponent<Text>().text = "HighScore : " + ScoreScript.Count.ToString();
+
+           Destroy(player);
            CameraScript.camerazero=0;
 
             Debug.Log("Break");
@@ -50,9 +55,18 @@ public class ColliderScript2 : MonoBehaviour
 
             if (Input.GetMouseButtonUp(0))
             {
-                SceneManager.LoadScene("GAME");
+                Application.LoadLevel("GAME");
                 ScoreScript.Count = 0;
             }
+
+            if (ScoreScript.Count > highScore)
+            {
+                highScore = ScoreScript.Count;
+                PlayerPrefs.SetInt(key,highScore);
+                gameOverScore.text = "HighScore : " + highScore.ToString();
+            }
+
+
 
 
         }
