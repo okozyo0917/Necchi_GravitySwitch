@@ -11,6 +11,7 @@ public class ColliderScript2 : MonoBehaviour
 
     public GameObject Explotion;
     public GameObject gameOver;
+    public GameObject ScoreDelete;
     public Text gameOverScore; //gameover時に表示されるスコア
     public int highScore;
     private string key = "HIGH SCORE";
@@ -21,6 +22,7 @@ public class ColliderScript2 : MonoBehaviour
         highScore = PlayerPrefs.GetInt(key,0);
         gameOverScore.text = "HighScore : " + highScore.ToString();
         Explotion.GetComponent<ParticleSystem>().Stop();
+
 
     }
 
@@ -41,6 +43,7 @@ public class ColliderScript2 : MonoBehaviour
         {
 
             GameObject player = GameObject.Find("Player");
+            GameObject ScoreDelete = GameObject.Find("Score");
             gameObject.transform.parent = null;
             Explotion.GetComponent<ParticleSystem>().Play();
             gameOver.SetActive(true);
@@ -48,6 +51,7 @@ public class ColliderScript2 : MonoBehaviour
             //gameOverScore.GetComponent<Text>().text = "HighScore : " + ScoreScript.Count.ToString();
 
            Destroy(player);
+            Destroy(ScoreDelete);
            CameraScript.camerazero=0;
 
             Debug.Log("Break");
@@ -55,7 +59,7 @@ public class ColliderScript2 : MonoBehaviour
 
             if (Input.GetMouseButtonUp(0))
             {
-                Application.LoadLevel("GAME");
+                SceneManager.LoadScene("GAME");
                 ScoreScript.Count = 0;
             }
 
