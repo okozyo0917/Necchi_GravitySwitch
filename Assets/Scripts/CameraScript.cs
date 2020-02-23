@@ -17,7 +17,7 @@ public class CameraScript : MonoBehaviour
     void Update()
     {
         transform.position += new Vector3(0, 0, speed * Time.deltaTime);
-
+      
         if (camerazero == 0)
        {
           speed = 0f;

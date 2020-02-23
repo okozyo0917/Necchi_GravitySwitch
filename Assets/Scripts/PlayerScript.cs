@@ -9,14 +9,16 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
 
-        
+     
     }
 
     // Update is called once per frame
     void Update()
     {
+        GetComponent<AudioSource>().Play();
         transform.position += new Vector3(0, 0, speed * Time.deltaTime);
-        
+    
+     
     }
 
 
