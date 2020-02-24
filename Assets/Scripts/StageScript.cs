@@ -15,6 +15,10 @@ public class StageScript : MonoBehaviour
     void Update()
     {
         player = GameObject.Find("Player");
+        if (player == null)
+        {
+            return;
+        }
         if (transform.position.z-player.transform.position.z<=-30) {
             Destroy(gameObject);
         }

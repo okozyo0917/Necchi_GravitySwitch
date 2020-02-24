@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
-    public float speed = 3.0f;
+    public float speed = 5.0f;
     // Start is called before the first frame update
     void Start()
     {
 
-     
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        GetComponent<AudioSource>().Play();
+    
         transform.position += new Vector3(0, 0, speed * Time.deltaTime);
     
      

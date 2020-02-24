@@ -15,10 +15,14 @@ public class ColliderScript2 : MonoBehaviour
     public Text gameOverScore; //gameover時に表示されるスコア
     public int highScore;
     private string key = "HIGH SCORE";
+    public GameObject player;
+
+    int scene = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("Player");
         highScore = PlayerPrefs.GetInt(key,0);
         gameOverScore.text = "HighScore : " + highScore.ToString();
         Explotion.GetComponent<ParticleSystem>().Stop();
@@ -29,20 +33,28 @@ public class ColliderScript2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
 
+        if (scene == 1)
+        {
+            if (Input.GetMouseButtonUp(0))
+            {
+                SceneManager.LoadScene("GAME");
+                ScoreScript.Count = 0;
+            }
+        }
 
     }
 
 
-    void OnTriggerStay(Collider other)
+    void OnTriggerEnter(Collider other)
     {
- 
+
+
 
         if (other.gameObject.tag =="Wakk")
         {
 
-            GameObject player = GameObject.Find("Player");
+           
             GameObject ScoreDelete = GameObject.Find("Score");
             gameObject.transform.parent = null;
             Explotion.GetComponent<ParticleSystem>().Play();
@@ -51,17 +63,13 @@ public class ColliderScript2 : MonoBehaviour
             //gameOverScore.GetComponent<Text>().text = "HighScore : " + ScoreScript.Count.ToString();
 
            Destroy(player);
-            Destroy(ScoreDelete);
+           Destroy(ScoreDelete);
            CameraScript.camerazero=0;
 
+            scene = 1;
             Debug.Log("Break");
 
 
-            if (Input.GetMouseButtonUp(0))
-            {
-                SceneManager.LoadScene("GAME");
-                ScoreScript.Count = 0;
-            }
 
             if (ScoreScript.Count > highScore)
             {
@@ -70,7 +78,7 @@ public class ColliderScript2 : MonoBehaviour
                 gameOverScore.text = "HighScore : " + highScore.ToString();
             }
 
-
+   
 
 
         }
